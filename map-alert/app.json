@@ -23,6 +23,10 @@
     "androidNavigationBar": {
       "barStyle": "dark-content",
       "backgroundColor": "#ffffff"
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#ffffff",
+      "barStyle": "dark-content"
     }
   }
 }

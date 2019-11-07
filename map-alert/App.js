@@ -5,12 +5,13 @@ import Constants from "expo-constants";
 
 import Login from "./src/Screens/Login";
 import Cadastro from "./src/Screens/Cadastro";
+import Home from "./src/Screens/Home";
 
 export default function App() {
   return (
     <AppProvider>
       <View style={styles.container}>
-        <Login />
+        <Home />
       </View>
     </AppProvider>
   );
@@ -18,8 +19,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight
-    // backgroundColor: "#F6F6F6"
+    flex: 1
+    // marginTop: Constants.statusBarHeight
   }
 });

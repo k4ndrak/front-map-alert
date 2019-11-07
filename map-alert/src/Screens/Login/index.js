@@ -1,5 +1,6 @@
 import React from "react";
-import { KeyboardAvoidingView, StyleSheet, Text } from "react-native";
+import { KeyboardAvoidingView, Text } from "react-native";
+import styles from "./styles";
 import {
   TextInput,
   Button,
@@ -7,28 +8,6 @@ import {
   Headline,
   HelperText
 } from "react-native-paper";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 15
-  },
-  buttonEntrarNoApp: {
-    marginVertical: 20
-  },
-  buttonTextCriarContaPage: {
-    fontSize: 12
-  },
-  snackberErroAlert: {
-    alignItems: "flex-end",
-    backgroundColor: "red"
-  },
-  titlePage: {
-    textAlign: "center",
-    marginBottom: 10
-  }
-});
 
 export default class Login extends React.Component {
   state = {

@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, KeyboardAvoidingView } from "react-native";
+import { Text, KeyboardAvoidingView } from "react-native";
+import styles from "./styles";
 import {
   TextInput,
   Button,
@@ -8,33 +9,6 @@ import {
   HelperText
 } from "react-native-paper";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    paddingHorizontal: 15
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    marginBottom: 50
-  },
-  buttonEntrarNoApp: {
-    marginVertical: 20
-  },
-  buttonTextCriarContaPage: {
-    fontSize: 12
-  },
-  snackberErroAlert: {
-    alignItems: "flex-end"
-  },
-  titlePage: {
-    textAlign: "center",
-    marginBottom: 10
-  }
-});
-
 export default class Cadastro extends React.Component {
   state = {
     username: "",
@@ -42,7 +16,7 @@ export default class Cadastro extends React.Component {
     confirmarSenha: "",
     nome: "",
     cpf: "",
-    erroAlert: false
+    erroAlert: true
   };
 
   render() {
@@ -63,10 +37,6 @@ export default class Cadastro extends React.Component {
             this._usernameInput && this._usernameInput.focus()
           }
         />
-
-        <HelperText type="error" visible={!this.state.nome.includes(" ")}>
-          Parece que algo nao está certo aqui.
-        </HelperText>
 
         <TextInput
           label="Username"
