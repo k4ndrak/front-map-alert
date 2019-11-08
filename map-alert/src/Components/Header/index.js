@@ -1,29 +1,23 @@
 import React from "react";
 import { View, TouchableWithoutFeedback } from "react-native";
-import { Caption, Title } from "react-native-paper";
+import { Title } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "./style";
 
-export default class Header extends React.Component {
-  renderHeader = () => {
-    return (
-      <View style={styles.header}>
-        <View style={{ flex: 3 }}>
-          <Caption>Localização atual</Caption>
-          <Title style={{ fontSize: 15 }}>Bloco C</Title>
-        </View>
-        <View
-          style={{ flex: 1, alignItems: "flex-end", justifyContent: "center" }}
-        >
-          {/* <TouchableWithoutFeedback>
-            <Ionicons name="ios-menu" size={35} />
-          </TouchableWithoutFeedback> */}
-        </View>
+const Header = props => {
+  return (
+    <View style={styles.header}>
+      <View>
+        <TouchableWithoutFeedback>
+          <Ionicons name="ios-close" size={40} />
+        </TouchableWithoutFeedback>
       </View>
-    );
-  };
+      <View>
+        <Title style={styles.titlePage}>{props.titlePage}</Title>
+      </View>
+      <View></View>
+    </View>
+  );
+};
 
-  render() {
-    return <>{this.renderHeader()}</>;
-  }
-}
+export default Header;

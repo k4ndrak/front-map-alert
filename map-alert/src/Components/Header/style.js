@@ -4,10 +4,15 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     paddingHorizontal: 15,
-    paddingTop: 5,
-    paddingBottom: 12,
+    paddingTop: 7,
+    paddingBottom: 5,
     backgroundColor: "#ffffff",
-    elevation: 4
+    elevation: 4,
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  titlePage: {
+    fontSize: 19
   }
 });
 

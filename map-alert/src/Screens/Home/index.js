@@ -6,7 +6,6 @@ import Map from "../../Components/Map";
 export default Home = () => {
   return (
     <>
-      <Header />
       <Map />
     </>
   );
