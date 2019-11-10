@@ -5,14 +5,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 15,
     paddingTop: 7,
-    paddingBottom: 5,
+    paddingBottom: 6,
     backgroundColor: "#ffffff",
-    elevation: 4,
+    elevation: 2,
     justifyContent: "space-between",
     alignItems: "center"
   },
   titlePage: {
-    fontSize: 19
+    fontSize: 19,
+    color: "#555555"
+  },
+  closeIcon: {
+    color: "#555555"
   }
 });
 

@@ -9,7 +9,7 @@ const Header = props => {
     <View style={styles.header}>
       <View>
         <TouchableWithoutFeedback>
-          <Ionicons name="ios-close" size={40} />
+          <Ionicons name="ios-close" size={40} style={styles.closeIcon} />
         </TouchableWithoutFeedback>
       </View>
       <View>

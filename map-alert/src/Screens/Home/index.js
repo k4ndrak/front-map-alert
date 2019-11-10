@@ -1,12 +1,13 @@
 import React from "react";
 
-import Header from "../../Components/Header";
 import Map from "../../Components/Map";
+import FabAdicionar from "../../Components/FabAdicionar";
 
 export default Home = () => {
   return (
     <>
       <Map />
+      <FabAdicionar />
     </>
   );
 };

@@ -10,7 +10,7 @@ export default function App() {
   return (
     <AppProvider>
       <View style={styles.container}>
-        <Login />
+        <Home />
       </View>
     </AppProvider>
   );
@@ -18,6 +18,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
   }
 });
