@@ -12,6 +12,30 @@ class AddAlerta extends React.Component {
     descricaoText: ""
   };
 
+  _enviarAlerta() {
+    fetch("192.168.1.109:8000/api/alert", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        latitude: null,
+        longitude: null,
+        descricao: this.state.descricaoText,
+        local: this.state.localText,
+        tipo: this.state.tipoText
+      })
+    })
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <MapContext.Consumer>
@@ -47,7 +71,7 @@ class AddAlerta extends React.Component {
                 <Button
                   icon="plus"
                   mode="contained"
-                  onPress={() => console.log("Pressed")}
+                  onPress={() => this._enviarAlerta()}
                   style={styles.addAlertaButton}
                 >
                   Adicionar

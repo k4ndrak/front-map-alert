@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style";
-import { View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
@@ -36,7 +36,13 @@ export default class Map extends React.Component {
   render() {
     const { region } = this.state;
     if (!region) {
-      return <View />;
+      return (
+        <ActivityIndicator
+          animating={true}
+          size="large"
+          style={styles.loadingMap}
+        />
+      );
     }
 
     return <MapView style={styles.map} region={region} showsUserLocation />;

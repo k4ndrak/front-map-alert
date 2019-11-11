@@ -12,7 +12,7 @@ class MapProvider extends React.Component {
 
     this.state = {
       fabOpen: false,
-      modalVisible: true,
+      modalVisible: false,
       _showModal: this._showModal,
       _hideModal: this._hideModal,
       _changeFab: this._changeFab
