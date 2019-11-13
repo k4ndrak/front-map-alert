@@ -3,7 +3,8 @@ import styles from "./style";
 import { ActivityIndicator } from "react-native-paper";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import MapView, { UrlTile, MAP_TYPES } from "react-native-maps";
+import { Platform } from "react-native";
+import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
 
 export default class Map extends React.Component {
   state = {
@@ -50,13 +51,17 @@ export default class Map extends React.Component {
         style={styles.map}
         region={region}
         provider={null}
-        mapType={MAP_TYPES.NONE}
+        mapType={Platform.OS == "android" ? MAP_TYPES.NONE : MAP_TYPES.STANDARD}
         rotateEnabled={false}
-        showsUserLocation
       >
         <UrlTile
           urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maximumZ={22}
+        />
+        <Marker
+          image={require("../../../assets/pin-64.png")}
+          coordinate={region}
+          title="Você está aqui!"
         />
       </MapView>
     );
