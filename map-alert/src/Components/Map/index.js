@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./style";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, Text } from "react-native-paper";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import { Platform } from "react-native";
+import { View, Platform } from "react-native";
 import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
 
 export default class Map extends React.Component {
@@ -38,11 +38,10 @@ export default class Map extends React.Component {
     const { region } = this.state;
     if (!region) {
       return (
-        <ActivityIndicator
-          animating={true}
-          size="large"
-          style={styles.loadingMap}
-        />
+        <View style={styles.loadingMap}>
+          <ActivityIndicator animating={true} size="large" />
+          <Text>Carregando mapa</Text>
+        </View>
       );
     }
 
