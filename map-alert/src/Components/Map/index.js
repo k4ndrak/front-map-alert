@@ -3,7 +3,7 @@ import styles from "./style";
 import { ActivityIndicator } from "react-native-paper";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import MapView from "react-native-maps";
+import MapView, { UrlTile, MAP_TYPES } from "react-native-maps";
 
 export default class Map extends React.Component {
   state = {
@@ -23,8 +23,8 @@ export default class Map extends React.Component {
       region: {
         latitude,
         longitude,
-        latitudeDelta: 0.0922 / 50,
-        longitudeDelta: 0.0421 / 50
+        latitudeDelta: 0.0922 / 30,
+        longitudeDelta: 0.0421 / 30
       }
     });
   };
@@ -45,6 +45,20 @@ export default class Map extends React.Component {
       );
     }
 
-    return <MapView style={styles.map} region={region} showsUserLocation />;
+    return (
+      <MapView
+        style={styles.map}
+        region={region}
+        provider={null}
+        mapType={MAP_TYPES.NONE}
+        rotateEnabled={false}
+        showsUserLocation
+      >
+        <UrlTile
+          urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          maximumZ={22}
+        />
+      </MapView>
+    );
   }
 }
