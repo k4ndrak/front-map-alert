@@ -9,7 +9,7 @@ const FabAdicionar = () => {
         <Portal>
           <FAB.Group
             open={mapContext.fabOpen}
-            icon={"navigation"}
+            icon={"map-marker"}
             actions={[
               {
                 icon: "plus",
