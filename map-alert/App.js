@@ -5,6 +5,7 @@ import { Provider as AppProvider } from "react-native-paper";
 import Login from "./src/Screens/Login";
 import Cadastro from "./src/Screens/Cadastro";
 import Home from "./src/Screens/Home";
+import AddAlerta from "./src/Screens/AddAlerta";
 
 export default function App() {
   return (
@@ -19,6 +20,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FAFBFD"
   }
 });

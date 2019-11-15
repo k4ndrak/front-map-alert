@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, Text } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { TextInput, Button, Snackbar, HelperText } from "react-native-paper";
 
