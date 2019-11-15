@@ -1,28 +1,27 @@
 import React from "react";
 import { Portal, FAB } from "react-native-paper";
-import { MapContext } from "../MapContext";
 
-const FabAdicionar = () => {
-  return (
-    <MapContext.Consumer>
-      {mapContext => (
-        <Portal>
-          <FAB.Group
-            open={mapContext.fabOpen}
-            icon={"map-marker"}
-            actions={[
-              {
-                icon: "plus",
-                label: "Adicionar Alerta",
-                onPress: mapContext._showModal
-              }
-            ]}
-            onStateChange={mapContext._changeFab}
-          />
-        </Portal>
-      )}
-    </MapContext.Consumer>
-  );
-};
+export default class FabAdicionar extends React.Component {
+  state = {
+    fabOpen: false
+  };
 
-export default FabAdicionar;
+  render() {
+    return (
+      <Portal>
+        <FAB.Group
+          open={this.state.fabOpen}
+          icon={"map-marker"}
+          actions={[
+            {
+              icon: "plus",
+              label: "Adicionar Alerta",
+              onPress: console.log("nvdkls")
+            }
+          ]}
+          onStateChange={({ open }) => this.setState({ fabOpen: open })}
+        />
+      </Portal>
+    );
+  }
+}
