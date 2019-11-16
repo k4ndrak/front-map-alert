@@ -1,5 +1,4 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
 
 import MapProvider from "../../Components/MapContext";
 import Map from "../../Components/Map";
@@ -14,12 +13,9 @@ export default class Home extends React.Component {
     return (
       <MapProvider>
         <Map />
-        <FabAdicionar />
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("AddAlerta")}
-        >
-          <Text>Button</Text>
-        </TouchableOpacity>
+        <FabAdicionar
+          buttonAddAlerta={() => this.props.navigation.push("AddAlerta")}
+        />
       </MapProvider>
     );
   }

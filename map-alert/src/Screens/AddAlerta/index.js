@@ -5,6 +5,10 @@ import Header from "../../Components/Header";
 import styles from "./styles";
 
 export default class AddAlerta extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
   state = {
     descricaoText: ""
   };
@@ -12,7 +16,11 @@ export default class AddAlerta extends React.Component {
   render() {
     return (
       <>
-        <Header titlePage="" />
+        <Header
+          titlePage=""
+          buttonHeaderLeft={() => this.props.navigation.goBack()}
+        />
+
         <TextInput
           placeholder="Descreva o problema"
           placeholderTextColor="grey"

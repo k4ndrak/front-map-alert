@@ -16,7 +16,7 @@ export default class FabAdicionar extends React.Component {
             {
               icon: "plus",
               label: "Adicionar Alerta",
-              onPress: console.log("nvdkls")
+              onPress: this.props.buttonAddAlerta
             }
           ]}
           onStateChange={({ open }) => this.setState({ fabOpen: open })}

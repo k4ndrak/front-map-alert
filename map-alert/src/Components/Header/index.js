@@ -10,15 +10,11 @@ import { Ionicons } from "@expo/vector-icons";
 import styles from "./style";
 
 export default class Header extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   render() {
     return (
       <View style={styles.header}>
         <View>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.props.buttonHeaderLeft}>
             <Ionicons name="ios-close" size={35} style={styles.closeIcon} />
           </TouchableWithoutFeedback>
         </View>
