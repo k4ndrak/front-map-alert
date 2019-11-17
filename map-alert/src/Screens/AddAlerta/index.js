@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 import Header from "../../Components/Header";
 import styles from "./styles";
@@ -13,26 +14,34 @@ export default class AddAlerta extends React.Component {
 
   state = {
     descricaoText: "",
-    error: ""
+    errorMessage: "",
+    errorAlert: false
   };
 
   _pressButtonAddAlert = async () => {
-    try {
-      const { latitude, longitude } = this.props.navigation.getParam("region");
+    if (this.state.descricaoText.length !== 0) {
+      try {
+        const { latitude, longitude } = this.props.navigation.getParam(
+          "region"
+        );
 
-      const response = await api.post(`/api/alert`, {
-        latitude: 12.1241,
-        longitude: 1231.312,
-        descricao: "teste",
-        local: 1,
-        tipo: 1
+        const response = await api.post(`/api/alert/`, {
+          latitude: latitude,
+          longitude: longitude,
+          descricao: this.state.descricaoText,
+          local: 1,
+          tipo: 1
+        });
+
+        this.props.navigation.navigate("Home");
+      } catch (err) {
+        console.error("Erro ao adicionar alerta------", err);
+      }
+    } else {
+      this.setState({
+        errorMessage: "Você precisa descrever o problema",
+        errorAlert: true
       });
-
-      console.log(response);
-
-      this.props.navigation.navigate("Home");
-    } catch (err) {
-      console.error("Erro ao adicionar alerta------", err);
     }
   };
 
@@ -54,6 +63,14 @@ export default class AddAlerta extends React.Component {
           value={this.state.descricaoText}
           style={styles.inputText}
         />
+
+        <Snackbar
+          visible={this.state.errorAlert}
+          onDismiss={() => this.setState({ errorAlert: false })}
+          duration={7000}
+        >
+          {this.state.errorMessage}
+        </Snackbar>
       </>
     );
   }

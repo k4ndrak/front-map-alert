@@ -14,7 +14,8 @@ export default class Home extends React.Component {
 
   state = {
     region: null,
-    alert: []
+    alert: [],
+    count: 0
   };
 
   _getOpenAlerts = async () => {
@@ -47,6 +48,8 @@ export default class Home extends React.Component {
   };
 
   componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => this._getOpenAlerts());
+
     this._getCurrentLocation();
     this._getOpenAlerts();
   }
@@ -60,7 +63,7 @@ export default class Home extends React.Component {
         />
         <FabAdicionar
           buttonAddAlerta={() =>
-            this.props.navigation.push("AddAlerta", {
+            this.props.navigation.navigate("AddAlerta", {
               region: this.state.region
             })
           }
