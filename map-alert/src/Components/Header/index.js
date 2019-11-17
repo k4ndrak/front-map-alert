@@ -23,7 +23,7 @@ export default class Header extends React.Component {
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => console.log("vnkdl")}
+            onPress={this.props.buttonHeaderRight}
             style={styles.headerButton}
           >
             <Text style={styles.headerButtonText}>Enviar</Text>

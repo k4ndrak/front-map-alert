@@ -1,6 +1,7 @@
 import React from "react";
 
-import MapProvider from "../../Components/MapContext";
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
 import Map from "../../Components/Map";
 import FabAdicionar from "../../Components/FabAdicionar";
 
@@ -12,6 +13,7 @@ export default class Home extends React.Component {
   };
 
   state = {
+    region: null,
     alertas: []
   };
 
@@ -20,24 +22,47 @@ export default class Home extends React.Component {
       const response = await api.get(`/api/alert`);
       const dados = response.data;
       this.setState({ alertas: dados });
-      console.log(this.state.alertas);
     } catch (err) {
       console.error("Erro fetching data --------", err);
     }
   };
 
+  _getCurrentLocation = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      return console.log("Permissão negada!");
+    }
+
+    const {
+      coords: { latitude, longitude }
+    } = await Location.getCurrentPositionAsync({});
+    this.setState({
+      region: {
+        latitude,
+        longitude,
+        latitudeDelta: 0.0922 / 30,
+        longitudeDelta: 0.0421 / 30
+      }
+    });
+  };
+
   componentDidMount() {
+    this._getCurrentLocation();
     this._getOpenAlerts();
   }
 
   render() {
     return (
-      <MapProvider>
-        <Map />
+      <>
+        <Map currentLocation={this.state.region} />
         <FabAdicionar
-          buttonAddAlerta={() => this.props.navigation.push("AddAlerta")}
+          buttonAddAlerta={() =>
+            this.props.navigation.push("AddAlerta", {
+              region: this.state.region
+            })
+          }
         />
-      </MapProvider>
+      </>
     );
   }
 }

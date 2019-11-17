@@ -1,41 +1,13 @@
 import React from "react";
 import styles from "./style";
 import { ActivityIndicator, Text } from "react-native-paper";
-import * as Permissions from "expo-permissions";
-import * as Location from "expo-location";
 import { View, Platform } from "react-native";
 import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
 
 export default class Map extends React.Component {
-  state = {
-    region: null
-  };
-
-  _getCurrentLocation = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      return console.log("Permissão negada!");
-    }
-
-    const {
-      coords: { latitude, longitude }
-    } = await Location.getCurrentPositionAsync({});
-    this.setState({
-      region: {
-        latitude,
-        longitude,
-        latitudeDelta: 0.0922 / 30,
-        longitudeDelta: 0.0421 / 30
-      }
-    });
-  };
-
-  componentDidMount() {
-    this._getCurrentLocation();
-  }
-
   render() {
-    const { region } = this.state;
+    const region = this.props.currentLocation;
+
     if (!region) {
       return (
         <View style={styles.loadingMap}>
