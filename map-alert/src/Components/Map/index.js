@@ -24,16 +24,24 @@ export default class Map extends React.Component {
         provider={null}
         mapType={Platform.OS == "android" ? MAP_TYPES.NONE : MAP_TYPES.STANDARD}
         rotateEnabled={false}
+        showsUserLocation
       >
         <UrlTile
           urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maximumZ={22}
         />
-        <Marker
-          image={require("../../../assets/pin-64.png")}
-          coordinate={region}
-          title="Você está aqui!"
-        />
+
+        {this.props.alertsOpened.map(alert => (
+          <Marker
+            key={alert.id}
+            image={require("../../../assets/pin-64.png")}
+            coordinate={{
+              latitude: alert.latitude,
+              longitude: alert.longitude
+            }}
+            title={alert.descricao}
+          />
+        ))}
       </MapView>
     );
   }

@@ -14,14 +14,14 @@ export default class Home extends React.Component {
 
   state = {
     region: null,
-    alertas: []
+    alert: []
   };
 
   _getOpenAlerts = async () => {
     try {
       const response = await api.get(`/api/alert`);
       const dados = response.data;
-      this.setState({ alertas: dados });
+      this.setState({ alerts: dados });
     } catch (err) {
       console.error("Erro fetching data --------", err);
     }
@@ -54,7 +54,10 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Map currentLocation={this.state.region} />
+        <Map
+          currentLocation={this.state.region}
+          alertsOpened={this.state.alerts}
+        />
         <FabAdicionar
           buttonAddAlerta={() =>
             this.props.navigation.push("AddAlerta", {
