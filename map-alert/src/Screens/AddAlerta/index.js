@@ -23,7 +23,6 @@ export default class AddAlerta extends React.Component {
 
         <TextInput
           placeholder="Descreva o problema"
-          placeholderTextColor="grey"
           editable
           multiline
           numberOfLines={10}
