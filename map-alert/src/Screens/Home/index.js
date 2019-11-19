@@ -14,8 +14,7 @@ export default class Home extends React.Component {
 
   state = {
     region: null,
-    alert: [],
-    count: 0
+    alert: []
   };
 
   _getOpenAlerts = async () => {
