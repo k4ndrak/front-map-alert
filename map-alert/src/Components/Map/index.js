@@ -1,22 +1,12 @@
 import React from "react";
 import styles from "./style";
-import { ActivityIndicator, Text } from "react-native-paper";
-import { View, Platform } from "react-native";
+import { Platform } from "react-native";
 import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
 
 export default class Map extends React.Component {
   render() {
     const region = this.props.currentLocation;
     const alertsOpened = this.props.alertsOpened;
-
-    if (!region || !alertsOpened) {
-      return (
-        <View style={styles.loadingMap}>
-          <ActivityIndicator animating={true} size="large" />
-          <Text>Carregando mapa</Text>
-        </View>
-      );
-    }
 
     return (
       <MapView

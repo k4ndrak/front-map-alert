@@ -2,6 +2,8 @@ import React from "react";
 
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
+import { ActivityIndicator, Text } from "react-native-paper";
+import { View } from "react-native";
 import Map from "../../Components/Map";
 import FabAdicionar from "../../Components/FabAdicionar";
 
@@ -14,11 +16,14 @@ export default class Home extends React.Component {
 
   state = {
     region: null,
-    alert: []
+    alerts: [],
+    loadingStatus: ""
   };
 
   _getOpenAlerts = async () => {
     try {
+      this.setState({ loadingStatus: "Carregando Alertas" });
+
       const response = await api.get(`/api/alert/`);
       const dados = response.data;
       this.setState({ alerts: dados });
@@ -28,6 +33,8 @@ export default class Home extends React.Component {
   };
 
   _getCurrentLocation = async () => {
+    this.setState({ loadingStatus: "Carregando sua localização" });
+
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
       return console.log("Permissão negada!");
@@ -54,6 +61,17 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.region || !this.state.alerts) {
+      return (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator animating={true} size="large" />
+          <Text>{this.state.loadingStatus}</Text>
+        </View>
+      );
+    }
+
     return (
       <>
         <Map
