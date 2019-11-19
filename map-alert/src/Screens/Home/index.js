@@ -19,7 +19,7 @@ export default class Home extends React.Component {
 
   _getOpenAlerts = async () => {
     try {
-      const response = await api.get(`/api/alert`);
+      const response = await api.get(`/api/alert/`);
       const dados = response.data;
       this.setState({ alerts: dados });
     } catch (err) {

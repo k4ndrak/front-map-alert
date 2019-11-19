@@ -7,8 +7,9 @@ import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
 export default class Map extends React.Component {
   render() {
     const region = this.props.currentLocation;
+    const alertsOpened = this.props.alertsOpened;
 
-    if (!region) {
+    if (!region || !alertsOpened) {
       return (
         <View style={styles.loadingMap}>
           <ActivityIndicator animating={true} size="large" />
@@ -28,7 +29,7 @@ export default class Map extends React.Component {
       >
         <UrlTile urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {this.props.alertsOpened.map(alert => (
+        {alertsOpened.map(alert => (
           <Marker
             key={alert.id}
             coordinate={{

@@ -62,6 +62,7 @@ export default class AddAlerta extends React.Component {
           onChangeText={text => this.setState({ descricaoText: text })}
           value={this.state.descricaoText}
           style={styles.inputText}
+          autoFocus={true}
         />
 
         <Snackbar
