@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./style";
 import { Platform } from "react-native";
 import MapView, { Marker, UrlTile, MAP_TYPES } from "react-native-maps";
+import { connect } from 'react-redux';
 
-export default class Map extends React.Component {
+
+class Map extends React.Component {
   render() {
     const region = this.props.currentLocation;
-    const alertsOpened = this.props.alertsOpened;
-
+    const { alerts } = this.props;
     return (
       <MapView
         style={styles.map}
@@ -19,7 +20,7 @@ export default class Map extends React.Component {
       >
         <UrlTile urlTemplate="http://c.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {alertsOpened.map(alert => (
+        {alerts.map(alert => (
           <Marker
             key={alert.id}
             coordinate={{
@@ -33,3 +34,9 @@ export default class Map extends React.Component {
     );
   }
 }
+
+const mapStateToProps = store => ({
+  alerts: store.alerts
+});
+
+export default connect(mapStateToProps)(Map);

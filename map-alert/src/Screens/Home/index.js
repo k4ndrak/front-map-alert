@@ -9,14 +9,17 @@ import FabAdicionar from "../../Components/FabAdicionar";
 
 import api from "../../services/api";
 
-export default class Home extends React.Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { handleAlertInfo } from '../../actions'
+
+class Home extends React.Component {
   static navigationOptions = {
     header: null
   };
 
   state = {
     region: null,
-    alerts: [],
     loadingStatus: ""
   };
 
@@ -26,7 +29,8 @@ export default class Home extends React.Component {
 
       const response = await api.get(`/api/alert/`);
       const dados = response.data;
-      this.setState({ alerts: dados });
+      const { handleAlertInfo } = this.props;
+      handleAlertInfo(dados);
     } catch (err) {
       console.error("Erro fetching data --------", err);
     }
@@ -43,6 +47,7 @@ export default class Home extends React.Component {
     const {
       coords: { latitude, longitude }
     } = await Location.getCurrentPositionAsync({});
+
     this.setState({
       region: {
         latitude,
@@ -61,7 +66,8 @@ export default class Home extends React.Component {
   }
 
   render() {
-    if (!this.state.region || !this.state.alerts) {
+    const { alerts } = this.props;
+    if (!this.state.region || !alerts) {
       return (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -76,16 +82,23 @@ export default class Home extends React.Component {
       <>
         <Map
           currentLocation={this.state.region}
-          alertsOpened={this.state.alerts}
         />
         <FabAdicionar
-          buttonAddAlerta={() =>
+          buttonAddAlerta={() => {
+            this._getCurrentLocation();
             this.props.navigation.navigate("AddAlerta", {
               region: this.state.region
             })
-          }
+          }}
         />
       </>
     );
   }
 }
+
+const mapStateToProps = store => ({
+  alerts: store.alerts,
+  region: store.region
+});
+const mapDispatchToProps = dispatch => bindActionCreators({ handleAlertInfo }, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
