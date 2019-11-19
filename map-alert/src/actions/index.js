@@ -19,7 +19,9 @@ export const updateCurrentLocation = data => {
         type: UPDATE_CURRENT_LOCATION,
         payload: {
             latitude: data.latitude,
-            longitude: data.longitude
+            longitude: data.longitude,
+            latitudeDelta: 0.0922 / 30,
+            longitudeDelta: 0.0421 / 30
         }
     }
 }

@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 
 class Map extends React.Component {
   render() {
-    const region = this.props.currentLocation;
-    const { alerts } = this.props;
+    const { alerts, region } = this.props;
+
     return (
       <MapView
         style={styles.map}
@@ -36,7 +36,8 @@ class Map extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  alerts: store.alerts
+  alerts: store.alerts,
+  region: store.region
 });
 
 export default connect(mapStateToProps)(Map);

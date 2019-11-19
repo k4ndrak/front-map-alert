@@ -1,5 +1,5 @@
 import { UPDATE_CURRENT_LOCATION } from '../actions/ActionTypes';
-regioninitial = {}
+regioninitial = null
 
 const RegionReducer = (state = regioninitial, action) => {
     switch (action.type) {

@@ -24,9 +24,7 @@ class AddAlerta extends React.Component {
   _pressButtonAddAlert = async () => {
     if (this.state.descricaoText.length !== 0) {
       try {
-        const { latitude, longitude } = this.props.navigation.getParam(
-          "region"
-        );
+        const { latitude, longitude } = this.props.region;
 
         const response = await api.post(`/api/alert/`, {
           local: "DCET",
@@ -83,6 +81,7 @@ class AddAlerta extends React.Component {
 }
 const mapDispatchToProps = dispatch => bindActionCreators({ handleAddAlert }, dispatch);
 const mapStateToProps = store => ({
-  alerts: store.alerts
+  alerts: store.alerts,
+  region: store.region
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddAlerta);

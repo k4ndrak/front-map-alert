@@ -11,7 +11,7 @@ import api from "../../services/api";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleAlertInfo } from '../../actions'
+import { handleAlertInfo, updateCurrentLocation } from '../../actions'
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -19,7 +19,6 @@ class Home extends React.Component {
   };
 
   state = {
-    region: null,
     loadingStatus: ""
   };
 
@@ -47,14 +46,11 @@ class Home extends React.Component {
     const {
       coords: { latitude, longitude }
     } = await Location.getCurrentPositionAsync({});
+    const { updateCurrentLocation } = this.props;
 
-    this.setState({
-      region: {
-        latitude,
-        longitude,
-        latitudeDelta: 0.0922 / 30,
-        longitudeDelta: 0.0421 / 30
-      }
+    updateCurrentLocation({
+      latitude: latitude,
+      longitude: longitude,
     });
   };
 
@@ -66,8 +62,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { alerts } = this.props;
-    if (!this.state.region || !alerts) {
+    const { alerts, region } = this.props;
+
+    if (!region || !alerts) {
       return (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -80,15 +77,11 @@ class Home extends React.Component {
 
     return (
       <>
-        <Map
-          currentLocation={this.state.region}
-        />
+        <Map />
         <FabAdicionar
           buttonAddAlerta={() => {
             this._getCurrentLocation();
-            this.props.navigation.navigate("AddAlerta", {
-              region: this.state.region
-            })
+            this.props.navigation.navigate("AddAlerta");
           }}
         />
       </>
@@ -100,5 +93,7 @@ const mapStateToProps = store => ({
   alerts: store.alerts,
   region: store.region
 });
-const mapDispatchToProps = dispatch => bindActionCreators({ handleAlertInfo }, dispatch);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ handleAlertInfo, updateCurrentLocation }, dispatch)
+);
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
