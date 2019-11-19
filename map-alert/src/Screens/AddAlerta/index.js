@@ -30,8 +30,8 @@ class AddAlerta extends React.Component {
           local: "DCET",
           tipo: "Água",
           descricao: this.state.descricaoText,
-          longitude: latitude,
-          latitude: longitude,
+          longitude: longitude,
+          latitude: latitude,
           status: 0
         });
         const { handleAddAlert } = this.props;
