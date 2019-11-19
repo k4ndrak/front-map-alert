@@ -1,13 +1,16 @@
 import React from "react";
 import { TextInput } from "react-native";
 import { Snackbar } from "react-native-paper";
-
 import Header from "../../Components/Header";
 import styles from "./styles";
 
 import api from "../../services/api";
 
-export default class AddAlerta extends React.Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { handleAddAlert } from '../../actions';
+
+class AddAlerta extends React.Component {
   static navigationOptions = {
     header: null
   };
@@ -21,18 +24,18 @@ export default class AddAlerta extends React.Component {
   _pressButtonAddAlert = async () => {
     if (this.state.descricaoText.length !== 0) {
       try {
-        const { latitude, longitude } = this.props.navigation.getParam(
-          "region"
-        );
+        const { latitude, longitude } = this.props.region;
 
         const response = await api.post(`/api/alert/`, {
-          latitude: latitude,
-          longitude: longitude,
+          local: "DCET",
+          tipo: "Água",
           descricao: this.state.descricaoText,
-          local: 1,
-          tipo: 1
+          longitude: longitude,
+          latitude: latitude,
+          status: 0
         });
-
+        const { handleAddAlert } = this.props;
+        handleAddAlert(response.data);
         this.props.navigation.navigate("Home");
       } catch (err) {
         console.error("Erro ao adicionar alerta------", err);
@@ -76,3 +79,9 @@ export default class AddAlerta extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => bindActionCreators({ handleAddAlert }, dispatch);
+const mapStateToProps = store => ({
+  alerts: store.alerts,
+  region: store.region
+});
+export default connect(mapStateToProps, mapDispatchToProps)(AddAlerta);
